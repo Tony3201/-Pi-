@@ -4,4 +4,93 @@
 得出结果3.14159265358979的值
 
 
-第二种：（未完待续）
+第二种：
+使用python自带模块
+
+    >>> import math
+    >>> math.pi
+    3.141592653589793
+
+第三种
+使用割圆术python
+#pi.py
+#割圆术
+
+import math
+
+polygon = 6
+r = 10
+M = r
+while polygon < 6*(2**24):
+    G = math.sqrt(r**2-M**2/4)
+    j = r - G
+    m = math.sqrt((M/2)**2 + j**2) # SQRT((M/2)^2+j^2)
+    polygon = 2*polygon
+    perimeter = m*polygon
+    pi = perimeter/(2*r)
+    print(f'圆周率({polygon}边形)：{pi}')
+    print(f'圆周率：{math.pi}')
+    M = m
+    print(f'\n')
+    
+第四种
+高斯-勒让德算法
+    #pi-AGM.py
+    #Gauss–Legendre algorithm
+    #高斯-勒让德算法
+
+    import math
+    a = 1
+    b = 1/math.sqrt(2)
+    t = 1/4
+    p = 1
+
+    w = 0
+
+    while w < 3:
+        a1 = (a+b)/2
+        b1 = math.sqrt(a*b)
+        t1 = t-p*((a-(a+b)/2)**2)
+        p1 = 2*p
+        pi = ((a1+b1)**2)/(4*t1)
+
+        a = a1
+        b = b1
+        t = t1
+        p = p1
+
+        w = w+1
+        print(f'迭代{w}次计算圆周率：{pi}')
+
+第五种
+楚德诺夫斯基算法
+#pi_c.py
+#楚德诺夫斯基算法
+#Chudnovsky algorithm
+import math
+L = 13591409
+X = 1
+M = 1
+K = 6
+q = 0
+sum = 0
+while True:
+    sum = sum + M*L/X
+    pi = 426880*math.sqrt(10005)*(sum**-1)
+    Lq = L + 545140134
+    Xq = X * (-262537412640768000)
+    Mq = M*((K**3-16*K)/(q+1)**3)
+    Kq = K + 12
+    q = q+1
+    L = Lq
+    X = Xq
+    M = Mq
+    K =Kq
+
+    if pi == math.pi:
+        break
+
+print(f'迭代{q}次，圆周率：{pi}')
+
+第六种：未完待续
+
